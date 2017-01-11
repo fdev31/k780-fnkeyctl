@@ -27,15 +27,15 @@ dev.set_interface_altsetting(iface)
 
 # send frame
 
-ON=[16, 2, 12, 26, 0, 0, 0]
-OFF=[16, 2, 12, 26, 1, 0, 0]
+ON=[16, 2, 12, 28, 0, 0, 0]
+OFF=[16, 2, 12, 28, 1, 0, 0]
 
 dev.ctrl_transfer(33, 9, 528, 2, ON if activate else OFF)
 
 # have to wait (Why ??) and sometimes repeat !
 
 if activate:
-    time.sleep(10)
+    time.sleep(5)
 else:
     time.sleep(1)
 
