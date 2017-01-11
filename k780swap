@@ -5,6 +5,7 @@ import time
 import usb.core
 
 unifying=0xc52b
+activate = len(sys.argv) == 1
 
 IFACE=2
 # find keyboard
@@ -29,10 +30,14 @@ dev.set_interface_altsetting(iface)
 ON=[16, 2, 12, 26, 0, 0, 0]
 OFF=[16, 2, 12, 28, 1, 0, 0]
 
-dev.ctrl_transfer(33, 9, 528, 2, OFF if len(sys.argv) > 1 else ON)
+dev.ctrl_transfer(33, 9, 528, 2, ON if activate else OFF)
 
 # have to wait (Why ??) and sometimes repeat !
-time.sleep(8)
+
+if activate:
+    time.sleep(10)
+else:
+    time.sleep(1)
 
 dev.reset()
 if reattach:
